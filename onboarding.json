@@ -1,20 +1,51 @@
 {
-  "phase": "local",
+  "phase": "schedules",
   "started": "2026-09-14",
   "steps": {
     "local": {
-      "env_configured": { "done": false, "label": "Configure environment variables (.env) — AEGIS_REPO_URL, optional GITHUB_TOKEN for private HTTPS clone" },
-      "first_skill_run": { "done": false, "label": "Run /audit-repo-access and confirm tip SHA + infra paths" },
-      "trial_review": { "done": false, "label": "Run /review-infra-diff once (real findings or honest nothing-risky)" },
-      "plugins_installed": { "done": false, "label": "Install plugins (agent-dev, trinity, utilities)" }
+      "env_configured": {
+        "done": true,
+        "label": "Configure environment variables (.env) \u2014 AEGIS_REPO_URL, optional GITHUB_TOKEN for private HTTPS clone",
+        "done_note": "2026-09-14: injected AEGIS_REPO_URL + GITHUB_TOKEN + OmniRoute mid-cost env on Trinity"
+      },
+      "first_skill_run": {
+        "done": true,
+        "label": "Run /audit-repo-access and confirm tip SHA + infra paths",
+        "done_note": "2026-09-14: ACCESS_OK tip 56ea1ded\u2026 exec XyV4I19wBhczj8YSm6k5sA"
+      },
+      "trial_review": {
+        "done": true,
+        "label": "Run /review-infra-diff once (real findings or honest nothing-risky)",
+        "done_note": "2026-09-14: REVIEW_BATCH_DONE NOTHING_RISKY tip 56ea1ded\u2026 exec F4GCeTZ0ulxTAPYmqpselw"
+      },
+      "plugins_installed": {
+        "done": true,
+        "label": "Install plugins (agent-dev, trinity, utilities)",
+        "done_note": "2026-09-14: declared in template.yaml; installed headlessly on Trinity boot"
+      }
     },
     "trinity": {
-      "onboarded": { "done": false, "label": "Deploy to Trinity (/trinity:onboard) — mid-cost OmniRoute per aegis-infra proposal" },
-      "first_remote_run": { "done": false, "label": "Run a skill remotely via mcp__trinity__chat_with_agent" }
+      "onboarded": {
+        "done": true,
+        "label": "Deploy to Trinity (/trinity:onboard) \u2014 mid-cost OmniRoute per aegis-infra proposal",
+        "done_note": "2026-09-14: created github:hamidmatiny/aegis-core-infra@main, running"
+      },
+      "first_remote_run": {
+        "done": true,
+        "label": "Run a skill remotely via mcp__trinity__chat_with_agent",
+        "done_note": "2026-09-14: remote /audit-repo-access + /review-infra-diff succeeded"
+      }
     },
     "schedules": {
-      "schedules_configured": { "done": false, "label": "Confirm recommended schedules in template.yaml (review cadence stays enabled:false until Hamid decides)" },
-      "first_scheduled_run": { "done": false, "label": "Verify first scheduled execution completed (only after a schedule is armed)" }
+      "schedules_configured": {
+        "done": true,
+        "label": "Confirm recommended schedules in template.yaml (review cadence stays enabled:false until Hamid decides)",
+        "done_note": "2026-09-14: schedules present enabled:false until Hamid arms cadence"
+      },
+      "first_scheduled_run": {
+        "done": false,
+        "label": "Verify first scheduled execution completed (only after a schedule is armed)"
+      }
     }
   }
 }

@@ -1,0 +1,6 @@
+default: localhost
+remotes:
+  localhost:
+    instance_url: http://localhost:8000
+    agent_name: aegis-core-infra
+    template: github:hamidmatiny/aegis-core-infra@main
