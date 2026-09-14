@@ -1,0 +1,20 @@
+{
+  "phase": "local",
+  "started": "2026-09-14",
+  "steps": {
+    "local": {
+      "env_configured": { "done": false, "label": "Configure environment variables (.env) — AEGIS_REPO_URL, optional GITHUB_TOKEN for private HTTPS clone" },
+      "first_skill_run": { "done": false, "label": "Run /audit-repo-access and confirm tip SHA + infra paths" },
+      "trial_review": { "done": false, "label": "Run /review-infra-diff once (real findings or honest nothing-risky)" },
+      "plugins_installed": { "done": false, "label": "Install plugins (agent-dev, trinity, utilities)" }
+    },
+    "trinity": {
+      "onboarded": { "done": false, "label": "Deploy to Trinity (/trinity:onboard) — mid-cost OmniRoute per aegis-infra proposal" },
+      "first_remote_run": { "done": false, "label": "Run a skill remotely via mcp__trinity__chat_with_agent" }
+    },
+    "schedules": {
+      "schedules_configured": { "done": false, "label": "Confirm recommended schedules in template.yaml (review cadence stays enabled:false until Hamid decides)" },
+      "first_scheduled_run": { "done": false, "label": "Verify first scheduled execution completed (only after a schedule is armed)" }
+    }
+  }
+}

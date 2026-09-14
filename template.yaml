@@ -1,0 +1,65 @@
+name: aegis-core-infra
+display_name: AEGIS Core Infra Engineer
+description: |
+  Advisory Engineering specialist that reviews Docker/Compose, CI workflows, and
+  database migrations in the real aegis product repo and flags deploy risk to
+  aegis-ceo — read-only, no merge/deploy authority.
+avatar_prompt: >
+  A focused infrastructure engineer in a dark workshop, mid-30s, short dark hair,
+  wearing a charcoal utility shirt and slim reading glasses, studying a wall of
+  glowing container and pipeline diagrams on translucent panels; cool cyan and
+  amber instrument light, shallow depth of field, serious but calm expression,
+  cinematic portrait, no logos.
+resources:
+  cpu: "2"
+  memory: "4g"
+
+plugins:
+  marketplaces:
+    - name: abilityai
+      source: abilityai/abilities
+  installed:
+    - agent-dev@abilityai
+    - trinity@abilityai
+    - utilities@abilityai
+
+credentials:
+  env_file:
+    - AEGIS_REPO_URL
+    - GITHUB_TOKEN
+
+credential_setup:
+  - name: AEGIS_REPO_URL
+    title: AEGIS product repo URL
+    description: Read-only clone URL for github.com/hamidmatiny/aegis (HTTPS or SSH).
+    required: true
+    secret: false
+    format: url
+    setup_url: https://github.com/hamidmatiny/aegis
+  - name: GITHUB_TOKEN
+    title: GitHub read token (optional if deploy key / public)
+    description: Fine-grained PAT with Contents Read on hamidmatiny/aegis when the repo is private and HTTPS clone is used.
+    required: false
+    secret: true
+    format: secret
+    setup_url: https://github.com/settings/tokens
+
+schedules:
+  - name: Daily infra diff review
+    cron: "0 7 * * *"
+    timezone: UTC
+    message: "Run /review-infra-diff on the most recent Docker/Compose, CI workflow, and migration-adjacent changes in the aegis repo. Cite real files. If nothing risky, say so honestly."
+    purpose: Catch deploy risk after merges
+    enabled: false
+  - name: Update dashboard
+    cron: "0 */6 * * *"
+    timezone: UTC
+    message: "Run /update-dashboard with current review and finding metrics from memory/."
+    purpose: Keep dashboard snapshot current
+    enabled: false
+  - name: Reconcile docs
+    cron: "0 9 * * 1"
+    timezone: UTC
+    message: "Run /reconcile-docs (report-only). Surface doc/skill/architecture drift; do not auto-edit CLAUDE.md."
+    purpose: Weekly coherence check
+    enabled: false
